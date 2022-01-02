@@ -9,10 +9,14 @@ describe('App', () => {
     const appWrapper = shallow(<App />)
   });
 
-  it('', () => {
+  it('renders a person list', () => {
     const appWrapper = shallow(<App />);
     const personList = appWrapper.find(PersonList);
   
     expect(personList).toHaveLength(1);
+  })
+
+  it('', () => {
+       
   })
 })

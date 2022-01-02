@@ -1,70 +1,144 @@
-# Getting Started with Create React App
+TDD principles 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#1 Write a failing test before any production code. ----RED
+#2 Write an implementation that makes the test pass ----GREEN
+#3 Refactor (SOLID principle, naming...)
 
-## Available Scripts
 
-In the project directory, you can run:
+3 laws of TDD:
+    - You are not allowed to write any production code unless it is to make a failing unit test pass.
+    - You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
+    - You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
 
-### `npm start`
+Zombie Testing: One Behavior at a Time
+Zombie testing is an acronym for:
+Z — Zero
+O — One
+M — Many (or More complex)
+B — Boundary Behaviors
+I — Interface definition
+E — Exercise Exceptional behavior
+S — Simple Scenarios, Simple Solutions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The Test Pyramid:
+    top(more isolation & faster)- User Interface Tests or End to End test
+    middle- Service Tests or integration test
+    base(more integration & slower)- Unit Test inputs/outpus (TDD)inside-out testing
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Steps:
+- mkdir DIRNAME where ever you store all your projects 
+- cd DIRNAME
+- code . (open visual studio)
+- npx create-react-app DIRNAME
+- cd DIRNAME
+- npm test (No tests found related to files changed since last commit).
+- press 'a' to run all tests(manual trigger).
+- You will see 1 passed which is in the App.test.js file.
+- You can use the word 'test' or 'it'(more popular) to define a test.
+- Create jsconfig.json file with typeAcquisition.(intelisense with jest).
+- Install Enzyme: npm i -D enzyme.
+- Delete all jsx in App.js except <div className="App">.
 
-### `npm run build`
+- Delete 
+	"import { render, screen } from '@testing-library/react';"
+ 	and 
+	initial test 
+	in 
+	App.test.js. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Add 
+	"import { shallow } from 'enzyme';" 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Install enzyme adapter:
+	(Make sure to match the version to the one in your package.json file)
+ 	"react": "^17.0.2",
+	"react-dom": "^17.0.2"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+	Run "npm i -D enzyme-adapter-react-17"
+		FAILED
+		v16 is the latest so try 
+	Run "npm i -D enzyme-adapter-react-16" instead
+		SUCCESS	
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Setup config of adapter(add adapter for test runner which is jest):
+		Add to setupTests.js file
+		
+		import { configure } from 'enzyme';
+		import Adapter from 'enzyme-adapter-react-16';
+		#configure gives enzyme a way to connect to jest
+		configure({ adapter: new Adapter()});
+	
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Create test that fails.
+	ex:
+	describe('App', () => {
+	  it('', () => {
+	    
+	  })
+	})
+	This test will pass when you run 'npm test' because we havent setup any assertion to fail.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+	ex2:
+	describe('App', () => {
+	  it('', () => {
+	    const appWrapper = shallow(<App />)
+	  })
+	})
+	-----Make sure to install enzyme to use shallow.
+	-----This test will pass when you run 'npm test' because we still havent setup any assertion to fail.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+	ex3:
+	describe('App', () => {
+	  it('renders without crashing', () => {
+	    const appWrapper = shallow(<App />)
+	  });
 
-## Learn More
+	  it('', () => {
+	    const appWrapper = shallow(<App />);
+	    appWrapper.find(PersonList);
+	  })
+	})
+	-----This test will fail because we don't have a person list.
+	-----The first step of the process is done which was creating a test that fails.(RED)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Create PersonList.js(Write only enough of an implementation as to pass the test.
+	add to PersonList.js
+		export default () => { 
+		}
+	add to App.js
+		----THIS LINE----import PersonList from './PersonList';
 
-### Code Splitting
+		function App() {
+		  return (
+		    <div className="App">
+		     ----THIS LINE----<PersonList />
+		    </div>
+		  );
+		}...
+	add to App.test.js
+		import PersonList from './PersonList';
+	-----The test should now pass as we implemented just enough for the test to pass.(GREEN)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Now we need to create an assertion.
+	Add to App.test.js
+		    it('', () => {
+		    const appWrapper = shallow(<App />);
+		    const personList = appWrapper.find(PersonList);
+		  
+		    ----THIS LINE---expect(personList).toHaveLength(1);
+		    })
+	-----The test should still pass and now we have a completed test with an assertion.
 
-### Analyzing the Bundle Size
+- Refactor stage(naming):
+	Add 		    
+		it('renders a person list', () => {...
+	
+- Create an object in the root component for next text(write test first)
+	
+				
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
