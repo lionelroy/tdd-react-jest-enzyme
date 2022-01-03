@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PersonList from './PersonList';
 
-function App() {
-  return (
+class App extends Component {
+  state = { people: [] }
+
+  render() {
+    return (
     <div className="App">
-     <PersonList />
+    <PersonList people={this.state.people} />
     </div>
-  );
+    );
+  }
 }
 
 export default App;

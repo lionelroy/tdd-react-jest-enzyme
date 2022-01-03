@@ -12,6 +12,7 @@ TDD principles
 
 Zombie Testing: One Behavior at a Time
 Zombie testing is an acronym for:
+N - Null
 Z — Zero
 O — One
 M — Many (or More complex)
@@ -137,8 +138,90 @@ Steps:
 	Add 		    
 		it('renders a person list', () => {...
 	
-- Create an object in the root component for next text(write test first)
-	
-				
+- Create an object in the root component for the next test(write test first)
+	Add in App.test.js
+		it('', () => {
+		       const appWrapper = shallow(<App />);
+		       const appState = appWrapper.state();
+		  })
+	-----ERROR----    ShallowWrapper::state() can only be called on class components
+	-----state does not exist on functional components so you must edit the App.js file and add a Class instead of a function.
+		import React, { Component } from 'react';
+		import PersonList from './PersonList';
+
+		class App extends Component {
+		  render() {
+		    return (
+		    <div className="App">
+		      <PersonList />
+		    </div>
+		    );
+		  }
+		}
+
+		export default App;
+	-----Success All tests are pass
+
+- Now we must implement test in case the appState returns Null which we don't want(Null ZOMBIES)
+	Add to App.test.js
+		it('', () => {
+		       const appWrapper = shallow(<App />);
+		       const appState = appWrapper.state();
+
+		      ------THIS LINE------ expect(appState).not.toBeNull();
+		  })
+	-----TEST FAILED(RED)
+	-----Received Null 
+
+- Add to App.js
+	state = {}
+	-----TEST PASS
+	-----Not receiving NULL anymore
+
+- Refactor
+	Add name to test
+		it('has state', () => ....
+
+- Always check if refactor stage is causing a test to fail.
+
+- Next Test(red)
+	Check if there's a people property defined
+	Add to App.test.js
+		it('', () => {
+		    const appWrapper = shallow(<App />);
+		    const appState = appWrapper.state();
+
+		    expect(appState.people).toBeDefined();
+		  })
+	-----TEST FAIL(RED)
+	-----People property does not exist on state yet
+
+- Add to App.js
+	 state = { people: [] }
+	-----TEST PASS
+	-----people property is now defined
+
+- Refactor(DRY principles...)
+	Clean redundancy in App.test.js
+	Delete in every tests
+		const appWrapper = shallow(<App />);
+	 
+	-----Refactored code
+		Add before every test
+			describe('App', () => {
+				let appWrapper;
+
+				beforeAll(() => {
+					appWrapper = shallow(<App />);
+				});
+	-----You can delete the following test completely which is now redundant.
+		 it('renders without crashing', () => {
+		    const appWrapper = shallow(<App />)
+		  });
+		
+
+
+
+		
 
 
