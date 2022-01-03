@@ -1,17 +1,14 @@
-TDD principles 
+TDD principles  and testing with React, Jest ans Enzyme
 
 #1 Write a failing test before any production code. ----RED
 #2 Write an implementation that makes the test pass ----GREEN
-#3 Refactor (SOLID principle, naming...)
+#3 Refactor (SOLID principle, DRY principles, naming...)
 
 
 3 laws of TDD:
     - You are not allowed to write any production code unless it is to make a failing unit test pass.
-    - You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
-    - You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
-
-Zombie Testing: One Behavior at a Time
-Zombie testing is an acronym for:
+ZOMBIES Testing: One Behavior at a time
+ZOMBIES Testing is an acronym for:
 N - Null
 Z — Zero
 O — One
@@ -23,9 +20,9 @@ S — Simple Scenarios, Simple Solutions
 
 
 The Test Pyramid:
-    top(more isolation & faster)- User Interface Tests or End to End test
-    middle- Service Tests or integration test
-    base(more integration & slower)- Unit Test inputs/outpus (TDD)inside-out testing
+    top(more isolation & faster)- User Interface tests or End to End test
+    middle- Service tests or integration test
+    base(more integration & slower)- Unit test inputs/outpus (TDD)inside-out testing
 
 
 Steps:
@@ -162,7 +159,7 @@ Steps:
 		export default App;
 	-----Success All tests are pass
 
-- Now we must implement test in case the appState returns Null which we don't want(Null ZOMBIES)
+- Now we must implement test in case the appState returns Null which we don't want(Null NZOMBIES(N))
 	Add to App.test.js
 		it('', () => {
 		       const appWrapper = shallow(<App />);
@@ -243,10 +240,140 @@ Steps:
 	  it('passes people property of state to personList as prop', () => {
 	-----TEST PASS(GREEN)
 
+- Keep in mind these tests are made to see if the app is working, 
+not to see if anything is rendered in the browser.
+- The tests for PersonList is now finished but nothing will appear in the browser by running our 
+development server with 'npm start' because we did not render anything in the PersonList component yet.
+
+
+- You can either bundle all your tests files in a test folder or 
+have your test file next to you component so everything is easy to track.
+- In this exemple I will have my tests files created next to the corresponding component file.
+- Create a test file for the PersonList component in your src folder and name it PersonList.test.js.
+	Add to PersonList.test.js
+		import React from 'react';
+		import { shallow } from 'enzyme';
+		import PersonList from './PersonList';
+
+		describe('PersonList', () => {
+		  it('', () => {
+		    const personListWrapper = shallow(<PersonList />);
+		    const peopleListUls = personListWrapper.find('ul');
+
+		    expect(peopleListUls).toHaveLength(1);
+		  })
+		})
+	-----TEST FAIL(RED)
+	----- Expected length: 1, Received length: 0
+
+- Implement unordered list(Uls) in PersonList.js
+	import React from 'react';
+
+	export default () => <ul></ul>
+	----TEST PASS(GREEN)
+	----Notice that you don't need a return statement when there's only 
+	one line of command in your function. 
+	-----Curly braces are used to define a scope for multiple things happening in a function.
+
+- Refactor(Naming)
+	Add to PersonList.test.js
+		  it('renders a ul element', () => {...
+	-----TEST PASS(GREEN)
+
+- Next Test(RED)...Create test that checks if list elements(li) are passed to the ul element
+- First start by implementing (0 in ZOMBIES(Z)).
+	it('', () => {
+	const personListWrapper = shallow(<PersonList />);
+	const peopleListItems = personListWrapper.find('li');
+
+	expect(peopleListItems).toHaveLength(0);
+
+	})
+	-----OOOPPPSS TEST PASS(GREEN) but we were supposed to write a test that fails first.
+	-----Altough this is true, we still want to keep this valid test because we do want to check 
+	if we get 0 items(people) in the unordered list(ul).(0 case in ZOMBIES)
+
+- Refactor(Naming)
+	it('renders no li element when no people exist', () => {...
+	-----TEST PASS(GREEN)
+
+- Now let's make sure we write a test sufficient enough to cause a failure(RED)(1 case in ZOMBIES(O)).
+	Add in PersonList.test.js
+		it('', () => {
+		    const people = [{firstName: 'Lionel', lastName: 'Mudpudel'}];
+		    const personListWrapper = shallow(<PersonList people={people} />);
+		    const peopleListItems = personListWrapper.find('li');
+
+		    expect(peopleListItems).toHaveLength(1);
+		  })
+	-----TEST FAIL(RED)
+	-----The test noticed that we don't have 1 list item(person) in our ul.
+
+- Add to PersonList.js	
+	export default () => 
+	<ul><li></li></ul>
+	-----TEST FAIL(RED)
+	-----Expected length: 0, Received length: 1
+	-----Now we have a different test failing which is the one checking for 0 list people. 
+	-----Only at this point, the importance of the 0 test is reveiled even tough it passed the first time.
+
+- We must check if the props.people exist and props.people.lenght is equal to 1.
+	Add to PersonList.js
+		export default (props) => {
+		  if (props.people && props.people.length == 1) {
+		    return <ul><li></li></ul>
+		  }
+		  return <ul></ul>
+		}
+	-----PASS TEST(GREEN)
 	
+- Refactor(NAMING)
+	  it('renders 1 li element when 1 person exists', () => {...
 
+- Refactor, implement single responsibility principle(function that does 1 thing only)and rewrite 
+the if statement with a turnary operator.
+	Add to PersonList.js
+	export default (props) => 
+  		<ul>{props.people && props.people.length == 1 ? <li></li>: undefined}</ul>
+	-----TEST PASS(GREEN)
 
+- Next test (multiple in ZOMBIES(M)).
+	Add to PeopleList.test.js
+		it('', () => {
+		    const people = [
+		      {firstName: 'Lionel', lastName: 'Mudpudel'},
+		      {firstName: 'Tiffany', lastName: 'Sancasel'}
+		    ];
+		    const personListWrapper = shallow(<PersonList people={people} />);
+		    const peopleListItems = personListWrapper.find('li');
 
-		
+		    expect(peopleListItems).toHaveLength(2);  
+		  })
 
+	-----TEST FAIL(RED)
+	-----Expected length: 2, Received length: 0
 
+- Add multiple items(people) to unordered list.
+- Change code for map method(high order function) in PersonList.js 
+which maps every person from an array into a new array with list items(li).
+	export default (props) => 
+ 	<ul>{props.people ? props.people.map(() => <li></li>): undefined }</ul>
+	-----TEST PASS(GREEN)
+	-----But we still have an error...
+	-----Warning: Each child in a list should have a unique "key" prop.
+
+- Implement key to with person and index parameter to map().
+	  <ul>{props.people ? props.people.map((person, i) => <li key={i}></li>): undefined }</ul>
+	----- We fixed the error and all our tests are still passed.
+
+- Refactor(NAMING)
+	  it('render multiple elements when more than 1 person exists', () => {
+
+- Refactor
+(destructuring the people property from the props)
+(set default to empty array)
+(map over people array)
+	Add to personList.js
+		export default ({ people =  [] }) => 
+  		<ul>{people.map((person, i) => <li key={i}></li>)}</ul>
+	-----TEST PASS(GREEN)
