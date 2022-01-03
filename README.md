@@ -198,7 +198,7 @@ Steps:
 
 - Add to App.js
 	 state = { people: [] }
-	-----TEST PASS
+	-----TEST PASS(GREEN)
 	-----people property is now defined
 
 - Refactor(DRY principles...)
@@ -214,11 +214,36 @@ Steps:
 				beforeAll(() => {
 					appWrapper = shallow(<App />);
 				});
+	-----Notice how const appWrapper changed to let appWrapper.
+	-----Notice there is no statement in beforeAll so the label is removed.
 	-----You can delete the following test completely which is now redundant.
 		 it('renders without crashing', () => {
 		    const appWrapper = shallow(<App />)
 		  });
+	-----Don't forget to name your last test
+		  it('has a people property on state', () => {...
+	-----TEST PASS(GREEN)
 		
+- Next test(RED)...make sure the people property is passed to the PersonList.(Write test first)
+	Add to App.test.js
+		it('', () => {
+		    const personList = appWrapper.find(PersonList);
+
+		    expect(personList.props().people).toEqual(appWrapper.state().people);
+		  })
+	-----TEST FAIL(RED)
+	-----Expected empty array but received undefined.
+
+- Create people prop and send it at state.people (App.js)
+	<PersonList people={this.state.people} />
+	-----TEST PASS(GREEN)
+
+- Refactor(Naming)
+	Add to App.test.js
+	  it('passes people property of state to personList as prop', () => {
+	-----TEST PASS(GREEN)
+
+	
 
 
 
