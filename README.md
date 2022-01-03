@@ -367,7 +367,7 @@ which maps every person from an array into a new array with list items(li).
 	----- We fixed the error and all our tests are still passed.
 
 - Refactor(NAMING)
-	  it('render multiple elements when more than 1 person exists', () => {
+	it('renders 1 li element for every person that exists', () => {
 
 - Refactor
 (destructuring the people property from the props)
@@ -377,3 +377,33 @@ which maps every person from an array into a new array with list items(li).
 		export default ({ people =  [] }) => 
   		<ul>{people.map((person, i) => <li key={i}></li>)}</ul>
 	-----TEST PASS(GREEN)
+
+- Write a test that checks if the names are appearing inside the list item elements.
+- IMPORTANT...
+You shouldn't have multiple assertions inside one test(single responsibility principle)
+but in this case, even tho we implement multiple assertions in one test
+they're part of the same "thing" that we are testing which is the name.
+	Add to PersonList.test.js
+		it('', () => {
+		    const people = [
+		      {firstName: 'Lionel', lastName: 'Mudpudel'}
+		    ];
+		  const personListWrapper = shallow(<PersonList people={people} />);
+
+		  expect(personListWrapper.find('li').text()).toContain(people[0].firstName);
+		  expect(personListWrapper.find('li').text()).toContain(people[0].lastName);  
+		  });
+	-----TEST FAIL(RED)
+	-----Expected substring: "Lionel", Received string:  ""
+
+- Add firstName and lastName inside list item element.
+	export default ({ people =  [] }) => 
+  	<ul>{people.map((person, i) => <li key={i}>{person.firstName} {person.lastName}</li>)}</ul>
+	-----TEST PASS(GREEN)
+
+- Refactor(NAMING)
+	  it('renders the first and last name of a person', () => {...
+	-----TEST PASS(GREEN)
+
+- The Personlist component tests is done and we can move on to a new component now...
+- TO BE CONTINUED...
