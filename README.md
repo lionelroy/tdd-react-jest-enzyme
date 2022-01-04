@@ -93,20 +93,20 @@
 <h3>Clean up boilerplate code and import Enzyme.</h3>
 <ol>
   <li>Delete all jsx in App.js except:</li>
-    div className="App"
+      div className="App"
   <li>Delete in App.test.js: initial test and...</li> 
-    import { render, screen } from '@testing-library/react';
+      import { render, screen } from '@testing-library/react';
   <li>Add in App.test.js:</li>
-    import { shallow } from 'enzyme';
+      import { shallow } from 'enzyme';
 </ol>
 <br/>
 
-<h3>Seup config of adapter.</h3>
-<p>add adapter for test runner which is jest) by adding to setupTests.js:</p>
-      import { configure } from 'enzyme';
-      import Adapter from 'enzyme-adapter-react-16';
-      configure({ adapter: new Adapter()});
-      Add to setupTests.js file
+<h3>Setup config of adapter.</h3>
+<p>Add adapter for test runner which is jest) by adding to setupTests.js:</p>
+    import { configure } from 'enzyme';
+    import Adapter from 'enzyme-adapter-react-16';
+    configure({ adapter: new Adapter()});
+    Add to setupTests.js file
 <br/>
 
 <h3>Let's start implementing our tests.</h3>
