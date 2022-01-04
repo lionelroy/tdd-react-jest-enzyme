@@ -11,8 +11,9 @@
 <ol>
   <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
-  <li>Refactoring (BLUE stage of the TDD-cycle).</li>
+  <li>Refactoring (GREEN2 stage of the TDD-cycle).</li>
 </ol>
+- I've decided to name the refactoring stage GREEN2 as it is the second check for a PASS TEST which is still green.
 <br/>
 
 <h4>Here is Robert C.Martin's(Uncle Bob) 3 laws of TDD from is book Clean Code:<h4>
@@ -69,7 +70,7 @@
 <ol>
   <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
-  <li>Refactoring (BLUE stage of the TDD-cycle).</li>
+  <li>Refactoring (GREEN2 stage of the TDD-cycle).</li>
 </ol>
 <p>Note that all run commands will have "" around them.</p>
 <h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
@@ -107,34 +108,40 @@
 </ol>
 <br/>
 
-<h3>Setup config of adapter.</h3>
-<p>Add adapter for test runner which is jest) by adding to setupTests.js:</p>
+<h3>Setup config of adapter</h3>
+<p>Add adapter for test runner(jest) by adding to setupTests.js:</p>
 
     import { configure } from 'enzyme';
     import Adapter from 'enzyme-adapter-react-16';
     configure({ adapter: new Adapter()});
-    Add to setupTests.js file
-    
+
 <br/>
 
-<h3>Let's start implementing our tests.</h3>
+<h3>Let's start implementing our tests</h3>
 
 <h4>Create test that fails(RED) - App.test.js</h4>
+
     describe('App', () => {
       it('', () => {
         
       })
     })
+
 - This test will pass when you run 'npm test' because we haven't set up any assertion to fail.
+
 - Add
+
     describe('App', () => {
       it('', () => {
         const appWrapper = shallow(<App />)
       })
     })
+
 - The test should still pass when you run 'npm test' because we still haven't set up any assertion to fail.
 - Make sure that Enzyme is installed in order to use shallow.
+
 - Add
+
     describe('App', () => {
       it('renders without crashing', () => {
         const appWrapper = shallow(<App />)
@@ -145,41 +152,52 @@
         appWrapper.find(PersonList);
       })
     })
+
 - SUCCESS(RED)...This test should fail because we don't have a person list implemented yet.
 - The first step of the process is done which was creating a test that fails.(RED)
 
+<h4>Create PersonList.js and write only enough of an implementation as to pass the test(GREEN).</h4>
+- Add to PersonList.js
 
-- Create PersonList.js(Write only enough of an implementation as to pass the test.
-	add to PersonList.js
 		export default () => { 
 		}
-	add to App.js
-		----THIS LINE----import PersonList from './PersonList';
+
+- Add to App.js
+
+		---THIS LINE--- import PersonList from './PersonList';
 
 		function App() {
 		  return (
 		    <div className="App">
-		     ----THIS LINE----<PersonList />
+		     ---THIS LINE---<PersonList />
 		    </div>
 		  );
 		}...
-	add to App.test.js
+
+- Add to App.test.js
+
 		import PersonList from './PersonList';
-	-----The test should now pass as we implemented just enough for the test to pass.(GREEN)
 
+- SUCCESS(GREEN)The test should now pass as we implemented just enough for the test to pass.
 - Now we need to create an assertion.
-	Add to App.test.js
-		    it('', () => {
-		    const appWrapper = shallow(<App />);
-		    const personList = appWrapper.find(PersonList);
-		  
-		    ----THIS LINE---expect(personList).toHaveLength(1);
-		    })
-	-----The test should still pass and now we have a completed test with an assertion.
+- Add to App.test.js
 
-- Refactor stage(naming):
-	Add 		    
+    it('', () => {
+    const appWrapper = shallow(<App />);
+    const personList = appWrapper.find(PersonList);
+
+    ----THIS LINE---expect(personList).toHaveLength(1);
+    })
+
+- The test should still pass and now we have a completed test with an assertion.
+
+<h4>Refactor stage(GREEN)</h4>
+- Let's add a name for our test.
+- Add 		    
+
 		it('renders a person list', () => {...
+
+- Remember to also test after refactoring, your new refactored code might have broken something. In this case, we are simply naming our test so no need to worry.
 	
 - Create an object in the root component for the next test(write test first)
 	Add in App.test.js
