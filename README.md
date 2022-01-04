@@ -71,72 +71,74 @@
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
   <li>Refactoring (BLUE stage of the TDD-cycle).</li>
 </ol>
+<p>Note that all run commands will have "" around them.</p>
 <h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
 <h3>Create app and install dependencies:</h3>
 <ol>
-  <li>Open up your terminal and run ```mkdir DIRNAME```(This command will create a new directory)...Don't forget to cd in your projects directory first.</li>
-  <li>```cd DIRNAME```(This command will bring you in the directory).</li>
-  <li>```code .``` (This command will open your directory in visual studio).</li>
+  <li>Open up your terminal and run "mkdir DIRNAME"(This command will create a new directory)...Don't forget to cd in your projects directory first.</li>
+  <li>"cd DIRNAME"(This command will bring you in the directory).</li>
+  <li>"code ." (This command will open your directory in visual studio).</li>
   <li>Once Visual Studio is open, open up a new terminal in your development environment.</li>
-  <li>```npx create-react-app DIRNAME```(This will create the React app in your directory).</li>
-  <li>```cd DIRNAME```Make sure you are still in your directory).</li>
+  <li>"npx create-react-app DIRNAME"(This will create the React app in your directory).</li>
+  <li>"cd DIRNAME"(Make sure you are still in your directory).</li>
   <li>In the file you will notice that a test is initiated with 'test' to define a test but you can also use 'it' which is more popular.</li>
-  <li>```npm i -D enzyme```(This will install Enzyme in your Developer environment).</li>
-  <li>```npm i -D enzyme-adapter-react-16```(Install Enzyme adapter).</li>
+  <li>"npm i -D enzyme"(This will install Enzyme in your Developer environment).</li>
+  <li>"npm i -D enzyme-adapter-react-16"(Install Enzyme adapter).</li>
 </ol>
-<p>Run ```npm test```(This will open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</p>
+<p>Run "npm test"(This will open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</p>
 <p>Press "a" to run all tests(manual trigger).</p>
 <p>You should now be able to see in your terminal: 1 PASS which is in the App.test.js file.</p>
 <br/>
 
 <h3>Clean up boilerplate code and import Enzyme.</h3>
 <ol>
-  <li>Delete all jsx in App.js except ```div className="App"```.</li>
-  <li>Delete in App.test.js. ```import { render, screen } from '@testing-library/react';"``` and initial test</li> 
-  <li>Add in App.test.js. ```import { shallow } from 'enzyme';```</li>
+  <li>Delete all jsx in App.js except:</li>
+    div className="App"
+  <li>Delete in App.test.js: initial test and...</li> 
+    import { render, screen } from '@testing-library/react';
+  <li>Add in App.test.js:</li>
+    import { shallow } from 'enzyme';
 </ol>
 <br/>
 
-<h3>Setup config of adapter.</h3>
-<p>add adapter for test runner(jest) by adding to setupTests.js:</p>
+<h3>Seup config of adapter.</h3>
+<p>add adapter for test runner which is jest) by adding to setupTests.js:</p>
+      import { configure } from 'enzyme';
+      import Adapter from 'enzyme-adapter-react-16';
+      configure({ adapter: new Adapter()});
+      Add to setupTests.js file
+<br/>
 
-    import { configure } from 'enzyme';
-    import Adapter from 'enzyme-adapter-react-16';
-    configure({ adapter: new Adapter()});
+<h3>Let's start implementing our tests.</h3>
 
-	
+<h4>Create test that fails(RED) - App.test.js</h4>
+    describe('App', () => {
+      it('', () => {
+        
+      })
+    })
+- This test will pass when you run 'npm test' because we haven't set up any assertion to fail.
+- Add
+    describe('App', () => {
+      it('', () => {
+        const appWrapper = shallow(<App />)
+      })
+    })
+- The test should still pass when you run 'npm test' because we still haven't set up any assertion to fail.
+- Make sure that Enzyme is installed in order to use shallow.
+- Add
+    describe('App', () => {
+      it('renders without crashing', () => {
+        const appWrapper = shallow(<App />)
+      });
 
-- Create test that fails.
-	ex:
-	describe('App', () => {
-	  it('', () => {
-	    
-	  })
-	})
-	This test will pass when you run 'npm test' because we havent setup any assertion to fail.
-
-	ex2:
-	describe('App', () => {
-	  it('', () => {
-	    const appWrapper = shallow(<App />)
-	  })
-	})
-	-----Make sure to install enzyme to use shallow.
-	-----This test will pass when you run 'npm test' because we still havent setup any assertion to fail.
-
-	ex3:
-	describe('App', () => {
-	  it('renders without crashing', () => {
-	    const appWrapper = shallow(<App />)
-	  });
-
-	  it('', () => {
-	    const appWrapper = shallow(<App />);
-	    appWrapper.find(PersonList);
-	  })
-	})
-	-----This test will fail because we don't have a person list.
-	-----The first step of the process is done which was creating a test that fails.(RED)
+      it('', () => {
+        const appWrapper = shallow(<App />);
+        appWrapper.find(PersonList);
+      })
+    })
+- SUCCESS(RED)...This test should fail because we don't have a person list implemented yet.
+- The first step of the process is done which was creating a test that fails.(RED)
 
 
 - Create PersonList.js(Write only enough of an implementation as to pass the test.
