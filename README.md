@@ -121,7 +121,7 @@
 
 <h3>Let's start implementing our tests</h3>
 
-<h4>Create test that fails(RED) - App.test.js</h4>
+<h4>Create a test that fails(RED) - App.test.js</h4>
 
     describe('App', () => {
       it('', () => {
@@ -131,7 +131,7 @@
 
 - This test will pass when you run 'npm test' because we haven't set up any assertion to fail.
 
-- Add
+<h5>Add</h5>
 
     describe('App', () => {
       it('', () => {
@@ -143,7 +143,7 @@
 - Also make sure that Enzyme is installed in order to use shallow.
 
 - Add
-
+    ---
     describe('App', () => {
       it('renders without crashing', () => {
         const appWrapper = shallow(<App />)
