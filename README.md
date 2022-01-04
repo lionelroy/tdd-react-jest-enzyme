@@ -71,49 +71,34 @@
 </ol>
 <p>Note that all run commands will have "" around them.</p>
 <h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
-<ol>Steps:</ol>
-<li>Open up your terminal and run "mkdir DIRNAME"(This command will create a new directory) where ever you store all your projects.</li>
-<li>"cd DIRNAME"(This command will bring you in the directory).</li>
-<li>"code ." (This command will open your directory in visual studio).</li>
-<li>Once Visual Studio is open, open up a new terminal in your development environment.</li>
-<li>Run "npx create-react-app DIRNAME"(This will create the React app in your directory).</li>
-<li>"cd DIRNAME"(Make sure you are still in your directory).</li>
-<li>"npm test"(Open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</li>
-<li>press "a" to run all tests(manual trigger).</li>
-<li>You should now be able to see in your terminal: 1 PASS which is in the App.test.js file.</li>
-<li>In the file you will notice that a test is called with 'test' to define a test but you can also use 'it'(more popular).</li>
-<li>Install Enzyme: "npm i -D enzyme".</li>
-<li>Delete all jsx in App.js except <div className="App">.</li>
-<li>Delete 
-	"import { render, screen } from '@testing-library/react';"
- 	and 
-	initial test 
-	in 
-	App.test.js. 
-</li> 
+<h3>Create app and install dependencies:</h3>
+<ol>
+  <li>Open up your terminal and run "mkdir DIRNAME"(This command will create a new directory) where ever you store all your projects.</li>
+  <li>"cd DIRNAME"(This command will bring you in the directory).</li>
+  <li>"code ." (This command will open your directory in visual studio).</li>
+  <li>Once Visual Studio is open, open up a new terminal in your development environment.</li>
+  <li>Run "npx create-react-app DIRNAME"(This will create the React app in your directory).</li>
+  <li>"cd DIRNAME"(Make sure you are still in your directory).</li>
+  <li>"npm test"(Open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</li>
+  <li>press "a" to run all tests(manual trigger).</li>
+  <li>You should now be able to see in your terminal: 1 PASS which is in the App.test.js file.</li>
+  <li>In the file you will notice that a test is called with 'test' to define a test but you can also use 'it'(more popular).</li>
+  <li>"npm i -D enzyme"(This will install Enzyme in your Developer environment).</li>
+  <li>"npm i -D enzyme-adapter-react-16"(Install Enzyme adapter</li>
+</ol>
+<h3>Clean up boilerplate code and import Enzyme.</h3>
+<ol>
+  <li>Delete all jsx in App.js except ---div className="App"---.</li>
+  <li>Delete in App.test.js. ---import { render, screen } from '@testing-library/react';"--- and initial test</li> 
+  <li>Add in App.test.js. ---import { shallow } from 'enzyme';---</li>
+</ol>
+<h3>Seup config of adapter.</h3>
+<p>add adapter for test runner which is jest) by adding to setupTests.js:</p>
+      import { configure } from 'enzyme';
+      import Adapter from 'enzyme-adapter-react-16';
+      configure({ adapter: new Adapter()});
+      Add to setupTests.js file
 
-- Add 
-	"import { shallow } from 'enzyme';" 
-
-- Install enzyme adapter:
-	(Make sure to match the version to the one in your package.json file)
- 	"react": "^17.0.2",
-	"react-dom": "^17.0.2"
-
-	Run "npm i -D enzyme-adapter-react-17"
-		FAILED
-		v16 is the latest so try 
-	Run "npm i -D enzyme-adapter-react-16" instead
-		SUCCESS	
-
-
-- Setup config of adapter(add adapter for test runner which is jest):
-		Add to setupTests.js file
-		
-		import { configure } from 'enzyme';
-		import Adapter from 'enzyme-adapter-react-16';
-		#configure gives enzyme a way to connect to jest
-		configure({ adapter: new Adapter()});
 	
 
 - Create test that fails.
