@@ -60,7 +60,18 @@
   <li>The more high-level you get the fewer tests you should have.</li>
 </ol>
 
-Steps:
+
+
+<h2>CREATE THE APP</h2>
+<p>Let's start by creating the app with all it's dependencies and clean up a bit of the boiler plate code inside our React application, after this is complete we will go through the TDD process by following the 3 stages from the TDD-cycle which was:</p>
+<ol>
+  <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
+  <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
+  <li>Refactoring (BLUE stage of the TDD-cycle).</li>
+</ol>
+
+<h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
+<ol>Steps:</ol>
 - mkdir DIRNAME where ever you store all your projects 
 - cd DIRNAME
 - code . (open visual studio)
