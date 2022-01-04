@@ -1,29 +1,63 @@
-TDD principles  and testing with React, Jest ans Enzyme
+<h1>TDD principles and testing with React, Jest ans Enzyme</h1>
 
-#1 Write a failing test before any production code. ----RED
-#2 Write an implementation that makes the test pass ----GREEN
-#3 Refactor (SOLID principle, DRY principles, naming...)
+<p>This Repository is an extension of Steve Bishops youtube tutorial on TDD testing.</p>
+<p>The list of testable components will grow with time and I'm open to any suggestions that will make this library a better resourse to learn about TDD development.</p>
 
+<h2>Theory</h2>
 
-3 laws of TDD:
-    - You are not allowed to write any production code unless it is to make a failing unit test pass.
-ZOMBIES Testing: One Behavior at a time
-ZOMBIES Testing is an acronym for:
-N - Null
-Z — Zero
-O — One
-M — Many (or More complex)
-B — Boundary Behaviors
-I — Interface definition
-E — Exercise Exceptional behavior
-S — Simple Scenarios, Simple Solutions
+<p>TDD(Test-Driven-Dvelopment) is a process of creating software which uses automated tests not only as a tool for proving the code correctness but it leads to developing applications in a clean and well-designed way.</p>
 
+<h4>Let's start with the TDD-cycle which consists of 3 stages:</h4>
+<ol>
+  <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
+  <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
+  <li>Refactoring (BLUE stage of the TDD-cycle).</li>
+</ol>
 
-The Test Pyramid:
-    top(more isolation & faster)- User Interface tests or End to End test
-    middle- Service tests or integration test
-    base(more integration & slower)- Unit test inputs/outpus (TDD)inside-out testing
+<h4>Here is Robert C.Martin's(Uncle Bob) 3 laws of TDD from is book Clean Code:<h4>
+<ol>
+  <li>You are not allowed to write any production code unless it is to make a failing unit test pass.</li>
+  <li>You are not allowed to write any more of a unit test that is sufficient to fail, and compilation failures are failures.</li>
+  <li>You are not allowed to write any more production code that is sufficient to pass the one failing the unit test.</li>
+</ol>
 
+<p>Uncle Bob's method is a classic in TDD but in this project we will use the Martin Fowler method which will let us refactor our code after the test as passed.</p>
+<p>Refactoring exemples would be NAMING your tests, SOLID principles, DRY principles...</P>
+
+<h4>Here is Martin Fowler's 3 laws of TDD:<h4>
+<ol>
+  <li>Write a test for the next bit of functionality you want to add.</li>
+  <li>Write the functional code until the test passes.</li>
+  <li>Refactor both new and old code to make it well structured.</li>
+</ol>
+
+<p>We will also use Test-Driven-Development guided by ZOMBIES.</p>
+<p>ZOMBIES is an acronym that helps you decide where to start, what test to write next and make sure that, to the best of your ability, you do not forget critical tests and production code behaviors. You can also add N(null) for NZOMBIES.</p>
+<h3>ZOMBIES Testing(One Behavior at a time)</h3>
+<h4>ZOMBIES Testing is an acronym for:</h4>
+<ul>
+  <li>N - Null</li>
+  <li>Z — Zero</li>
+  <li>O — One</li>
+  <li>M — Many (or More complex)</li>
+  <li>B — Boundary Behaviors</li>
+  <li>I — Interface definition</li>
+  <li>E — Exercise Exceptional behavior</li>
+  <li>S — Simple Scenarios, Simple Solutions</li>
+</ul>
+
+<p>Here we have Mike Cohn's test pyramid that consists of three layers that should be implemented in your test suite.</p>
+<h4>The Test Pyramid:</h4>
+<ul>
+  <li>Top(more isolation & faster)- User Interface tests or End to End test.</li>
+  <li>Middle- Service test or integration test.</li>
+  <li>Base(more integration & slower)- Unit test, inputs/outpus, (TDD)inside-out testing.</li>
+</ul>
+<p>Due to its simplicity the essence of the test pyramid serves as a good rule of thumb when it comes to establishing your own test suite. Your best bet is to remember two things from Cohn's original test pyramid:</P>
+<ol>
+<li>Write tests with different granularity.</li>
+<li>The more high-level you get the fewer tests you should have.</li>
+</ol>
 
 Steps:
 - mkdir DIRNAME where ever you store all your projects 
@@ -407,3 +441,4 @@ they're part of the same "thing" that we are testing which is the name.
 
 - The Personlist component tests is done and we can move on to a new component now...
 - TO BE CONTINUED...
+- Create library of TDD components and add more theory about TDD.
