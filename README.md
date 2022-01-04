@@ -13,6 +13,7 @@
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
   <li>Refactoring (BLUE stage of the TDD-cycle).</li>
 </ol>
+<br/>
 
 <h4>Here is Robert C.Martin's(Uncle Bob) 3 laws of TDD from is book Clean Code:<h4>
 <ol>
@@ -30,6 +31,7 @@
   <li>Write the functional code until the test passes.</li>
   <li>Refactor both new and old code to make it well structured.</li>
 </ol>
+<br/>
 
 <h3>ZOMBIES Testing(One Behavior at a time)</h3>
 <p>We will also use Test-Driven-Development guided by ZOMBIES.</p>
@@ -59,45 +61,49 @@
   <li>Write tests with different granularity.</li>
   <li>The more high-level you get the fewer tests you should have.</li>
 </ol>
-
-
+<br/><br/>
 
 <h2>CREATE THE APP</h2>
+<p>You can have your code and this README file open in seperate windows next to each other to follow along.</p>
 <p>Let's start by creating the app with all it's dependencies and clean up a bit of the boiler plate code inside our React application, after this is complete we will go through the TDD process by following the 3 stages from the TDD-cycle which was:</p>
 <ol>
   <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
   <li>Refactoring (BLUE stage of the TDD-cycle).</li>
 </ol>
-<p>Note that all run commands will have "" around them.</p>
 <h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
 <h3>Create app and install dependencies:</h3>
 <ol>
-  <li>Open up your terminal and run "mkdir DIRNAME"(This command will create a new directory) where ever you store all your projects.</li>
-  <li>"cd DIRNAME"(This command will bring you in the directory).</li>
-  <li>"code ." (This command will open your directory in visual studio).</li>
+  <li>Open up your terminal and run ```mkdir DIRNAME```(This command will create a new directory)...Don't forget to cd in your projects directory first.</li>
+  <li>```cd DIRNAME```(This command will bring you in the directory).</li>
+  <li>```code .``` (This command will open your directory in visual studio).</li>
   <li>Once Visual Studio is open, open up a new terminal in your development environment.</li>
-  <li>Run "npx create-react-app DIRNAME"(This will create the React app in your directory).</li>
-  <li>"cd DIRNAME"(Make sure you are still in your directory).</li>
-  <li>"npm test"(Open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</li>
-  <li>press "a" to run all tests(manual trigger).</li>
-  <li>You should now be able to see in your terminal: 1 PASS which is in the App.test.js file.</li>
-  <li>In the file you will notice that a test is called with 'test' to define a test but you can also use 'it'(more popular).</li>
-  <li>"npm i -D enzyme"(This will install Enzyme in your Developer environment).</li>
-  <li>"npm i -D enzyme-adapter-react-16"(Install Enzyme adapter</li>
+  <li>```npx create-react-app DIRNAME```(This will create the React app in your directory).</li>
+  <li>```cd DIRNAME```Make sure you are still in your directory).</li>
+  <li>In the file you will notice that a test is initiated with 'test' to define a test but you can also use 'it' which is more popular.</li>
+  <li>```npm i -D enzyme```(This will install Enzyme in your Developer environment).</li>
+  <li>```npm i -D enzyme-adapter-react-16```(Install Enzyme adapter).</li>
 </ol>
+<p>Run ```npm test```(This will open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</p>
+<p>Press "a" to run all tests(manual trigger).</p>
+<p>You should now be able to see in your terminal: 1 PASS which is in the App.test.js file.</p>
+<br/>
+
 <h3>Clean up boilerplate code and import Enzyme.</h3>
 <ol>
-  <li>Delete all jsx in App.js except ---div className="App"---.</li>
-  <li>Delete in App.test.js. ---import { render, screen } from '@testing-library/react';"--- and initial test</li> 
-  <li>Add in App.test.js. ---import { shallow } from 'enzyme';---</li>
+  <li>Delete all jsx in App.js except ```div className="App"```.</li>
+  <li>Delete in App.test.js. ```import { render, screen } from '@testing-library/react';"``` and initial test</li> 
+  <li>Add in App.test.js. ```import { shallow } from 'enzyme';```</li>
 </ol>
-<h3>Seup config of adapter.</h3>
-<p>add adapter for test runner which is jest) by adding to setupTests.js:</p>
-      import { configure } from 'enzyme';
-      import Adapter from 'enzyme-adapter-react-16';
-      configure({ adapter: new Adapter()});
-      Add to setupTests.js file
+<br/>
+
+<h3>Setup config of adapter.</h3>
+<p>add adapter for test runner(jest) by adding to setupTests.js:</p>
+```
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+configure({ adapter: new Adapter()});
+```
 
 	
 
