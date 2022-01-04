@@ -99,12 +99,11 @@
 
 <h3>Setup config of adapter.</h3>
 <p>add adapter for test runner(jest) by adding to setupTests.js:</p>
-```
+~~~
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter()});
-```
-
+~~~
 	
 
 - Create test that fails.
