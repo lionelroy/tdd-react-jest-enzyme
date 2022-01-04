@@ -1,13 +1,13 @@
-<h1>TDD principles and testing with React, Jest ans Enzyme</h1>
+<h1>TDD principles and testing with React, Jest and Enzyme</h1>
 
 <p>This Repository is an extension of Steve Bishops youtube tutorial on TDD testing.</p>
-<p>The list of testable components will grow with time and I'm open to any suggestions that will make this library a better resourse to learn about TDD development.</p>
+<p>The list of testable components will grow with time and I'm open to any suggestions that will make this library a better resource to learn about TDD development.</p>
 
 <h2>Theory</h2>
 
 <p>TDD(Test-Driven-Dvelopment) is a process of creating software which uses automated tests not only as a tool for proving the code correctness but it leads to developing applications in a clean and well-designed way.</p>
 
-<h4>Let's start with the TDD-cycle which consists of 3 stages:</h4>
+<h3>Let's start with the TDD-cycle which consists of 3 stages:</h4>
 <ol>
   <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
@@ -31,10 +31,10 @@
   <li>Refactor both new and old code to make it well structured.</li>
 </ol>
 
+<h3>ZOMBIES Testing(One Behavior at a time)</h3>
 <p>We will also use Test-Driven-Development guided by ZOMBIES.</p>
 <p>ZOMBIES is an acronym that helps you decide where to start, what test to write next and make sure that, to the best of your ability, you do not forget critical tests and production code behaviors. You can also add N(null) for NZOMBIES.</p>
-<h3>ZOMBIES Testing(One Behavior at a time)</h3>
-<h4>ZOMBIES Testing is an acronym for:</h4>
+<h4>NZOMBIES stands for:</h4>
 <ul>
   <li>N - Null</li>
   <li>Z — Zero</li>
@@ -45,9 +45,10 @@
   <li>E — Exercise Exceptional behavior</li>
   <li>S — Simple Scenarios, Simple Solutions</li>
 </ul>
+<br/>
 
+<h3>The Test Pyramid</h3>
 <p>Here we have Mike Cohn's test pyramid that consists of three layers that should be implemented in your test suite.</p>
-<h4>The Test Pyramid:</h4>
 <ul>
   <li>Top(more isolation & faster)- User Interface tests or End to End test.</li>
   <li>Middle- Service test or integration test.</li>
@@ -55,8 +56,8 @@
 </ul>
 <p>Due to its simplicity the essence of the test pyramid serves as a good rule of thumb when it comes to establishing your own test suite. Your best bet is to remember two things from Cohn's original test pyramid:</P>
 <ol>
-<li>Write tests with different granularity.</li>
-<li>The more high-level you get the fewer tests you should have.</li>
+  <li>Write tests with different granularity.</li>
+  <li>The more high-level you get the fewer tests you should have.</li>
 </ol>
 
 Steps:
