@@ -69,28 +69,28 @@
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
   <li>Refactoring (BLUE stage of the TDD-cycle).</li>
 </ol>
-
+<p>Note that all run commands will have "" around them.</p>
 <h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
 <ol>Steps:</ol>
-- mkdir DIRNAME where ever you store all your projects 
-- cd DIRNAME
-- code . (open visual studio)
-- npx create-react-app DIRNAME
-- cd DIRNAME
-- npm test (No tests found related to files changed since last commit).
-- press 'a' to run all tests(manual trigger).
-- You will see 1 passed which is in the App.test.js file.
-- You can use the word 'test' or 'it'(more popular) to define a test.
-- Create jsconfig.json file with typeAcquisition.(intelisense with jest).
-- Install Enzyme: npm i -D enzyme.
-- Delete all jsx in App.js except <div className="App">.
-
-- Delete 
+<li>Open up your terminal and run "mkdir DIRNAME"(This command will create a new directory) where ever you store all your projects.</li>
+<li>"cd DIRNAME"(This command will bring you in the directory).</li>
+<li>"code ." (This command will open your directory in visual studio).</li>
+<li>Once Visual Studio is open, open up a new terminal in your development environment.</li>
+<li>Run "npx create-react-app DIRNAME"(This will create the React app in your directory).</li>
+<li>"cd DIRNAME"(Make sure you are still in your directory).</li>
+<li>"npm test"(Open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</li>
+<li>press "a" to run all tests(manual trigger).</li>
+<li>You should now be able to see in your terminal: 1 PASS which is in the App.test.js file.</li>
+<li>In the file you will notice that a test is called with 'test' to define a test but you can also use 'it'(more popular).</li>
+<li>Install Enzyme: "npm i -D enzyme".</li>
+<li>Delete all jsx in App.js except <div className="App">.</li>
+<li>Delete 
 	"import { render, screen } from '@testing-library/react';"
  	and 
 	initial test 
 	in 
 	App.test.js. 
+</li> 
 
 - Add 
 	"import { shallow } from 'enzyme';" 
