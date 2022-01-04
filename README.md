@@ -536,7 +536,7 @@ they're part of the same "thing" that we are testing which is the name.</p>
 <h4>Refactor(NAMING)</h4>
 <h5>Add</h5>
 
-	  it('renders the first and last name of a person', () => {...
+	  it('renders the first and last name of a person', () =cd > {...
 
 - TEST PASS(GREEN)
 
