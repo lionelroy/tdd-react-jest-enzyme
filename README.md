@@ -1,6 +1,5 @@
 <h1>TDD principles and testing with React, Jest and Enzyme</h1>
 
-<p>This Repository is an extension of Steve Bishops youtube tutorial on TDD testing.</p>
 <p>The list of testable components will grow with time and I'm open to any suggestions that will make this library a better resource to learn about TDD development.</p>
 
 <h2>Theory</h2>
@@ -51,13 +50,14 @@
 <br/>
 
 <h3>The Test Pyramid</h3>
-<p>Here we have Mike Cohn's test pyramid that consists of three layers that should be implemented in your test suite.</p>
+<p>Here we have Mike Cohn's test pyramid consisting of three layers that should be implemented in your test suite.</p>
 <ul>
   <li>Top(more isolation & faster)- User Interface tests or End to End test.</li>
   <li>Middle- Service test or integration test.</li>
   <li>Base(more integration & slower)- Unit test, inputs/outpus, (TDD)inside-out testing.</li>
 </ul>
-<p>Due to its simplicity the essence of the test pyramid serves as a good rule of thumb when it comes to establishing your own test suite. Your best bet is to remember two things from Cohn's original test pyramid:</P>
+<p>Due to its simplicity the essence of the test pyramid serves as a good rule of thumb when it comes to establishing your own test suite.</p>
+<p>Your best bet is to remember two things from Cohn's original test pyramid:</P>
 <ol>
   <li>Write tests with different granularity.</li>
   <li>The more high-level you get the fewer tests you should have.</li>
@@ -66,29 +66,31 @@
 
 <h2>CREATE THE APP</h2>
 <p>You can have your code and this README file open in seperate windows next to each other to follow along.</p>
-<p>Let's start by creating the app with all it's dependencies and clean up a bit of the boiler plate code inside our React application, after this is complete we will go through the TDD process by following the 3 stages from the TDD-cycle which was:</p>
+<p>Let's start by creating the app with all it's dependencies and clean up a bit of the boiler plate code inside our React application, after this is completed, we will go through the TDD process by following the 3 stages from the TDD-cycle:</p>
 <ol>
   <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
   <li>Refactoring (GREEN2 stage of the TDD-cycle).</li>
 </ol>
-<p>Note that all run commands will have "" around them.</p>
 <h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
+<p>Note that all run commands will have "" around them.</p>
+
 <h3>Create app and install dependencies:</h3>
 <ol>
-  <li>Open up your terminal and run "mkdir DIRNAME"(This command will create a new directory)...Don't forget to cd in your projects directory first.</li>
+  <li>Open up your terminal, "cd" in your project directory and run "mkdir DIRNAME"(This command will create a new directory named DIRNAME but you can change this if you want).</li>
   <li>"cd DIRNAME"(This command will bring you in the directory).</li>
   <li>"code ." (This command will open your directory in visual studio).</li>
   <li>Once Visual Studio is open, open up a new terminal in your development environment.</li>
   <li>"npx create-react-app DIRNAME"(This will create the React app in your directory).</li>
   <li>"cd DIRNAME"(Make sure you are still in your directory).</li>
-  <li>In the file you will notice that a test is initiated with 'test' to define a test but you can also use 'it' which is more popular.</li>
   <li>"npm i -D enzyme"(This will install Enzyme in your Developer environment).</li>
   <li>"npm i -D enzyme-adapter-react-16"(Install Enzyme adapter).</li>
 </ol>
+
 <p>Run "npm test"(This will open up the jest test environment which is created with your React app)...You will see no tests found related to files changed since last commit.</p>
 <p>Press "a" to run all tests(manual trigger).</p>
 <p>You should now be able to see in your terminal: 1 PASS which is in the App.test.js file.</p>
+<p>In the file you will notice that a test is initiated with 'test' but you can also use 'it' which is more popular.</p>
 <br/>
 
 <h3>Clean up boilerplate code and import Enzyme.</h3>
@@ -138,7 +140,7 @@
     })
 
 - The test should still pass when you run 'npm test' because we still haven't set up any assertion to fail.
-- Make sure that Enzyme is installed in order to use shallow.
+- Also make sure that Enzyme is installed in order to use shallow.
 
 - Add
 
@@ -146,7 +148,6 @@
       it('renders without crashing', () => {
         const appWrapper = shallow(<App />)
       });
-
       it('', () => {
         const appWrapper = shallow(<App />);
         appWrapper.find(PersonList);
@@ -470,5 +471,8 @@ they're part of the same "thing" that we are testing which is the name.
 	-----TEST PASS(GREEN)
 
 - The Personlist component tests is done and we can move on to a new component now...
+
 - TO BE CONTINUED...
 - Create library of TDD components and add more theory about TDD.
+
+<p>This Project is an extension of Steve Bishops youtube tutorial on TDD testing.</p>
