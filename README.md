@@ -362,22 +362,19 @@ have your test files next to their corresponding component so everything is easy
 - TEST FAIL(RED)
 - Expected length: 1, Received length: 0
 
-<h4></h4>Implement unordered list(Uls) in PersonList.js
-<h5></h5>
-Add
+<h4>Implement unordered list(Uls) in PersonList.js</h4>
+<h5>Add</h5>
 
 	  import React from 'react';
 
 	  export default () => <ul></ul>
 
 - TEST PASS(GREEN)
-- Notice that you don't need a return statement when there's only 
-	one line of command in your function. 
+- Notice you don't need a return statement when there's only one line of command in your function. 
 - Curly braces are used to define a scope for multiple things happening in a function.
 
-<h4></h4>Refactor(Naming)
-<h5></h5>
-Add to PersonList.test.js
+<h4>Refactor(Naming)</h4>
+<h5>Add to PersonList.test.js</h5>
 
     it('renders a ul element', () => {...
 
@@ -399,31 +396,28 @@ Add
 - Altough this is true, we still want to keep this valid test because we do want to check 
 	if we get 0 items(people) in the unordered list(ul).(0 case in ZOMBIES)
 
-<h4></h4>Refactor(Naming)
-<h5></h5>
-Add
+<h4>Refactor(Naming)</h4>
+<h5>Add</h5>
 
     it('renders no li element when no people exist', () => {...
 
 - TEST PASS(GREEN)
 
 - Now let's make sure we write a test sufficient enough to cause a failure(RED)(1 case in ZOMBIES(O)).
-<h5></h5>
-Add in PersonList.test.js
+<h5>Add in PersonList.test.js</h5>
 
 		it('', () => {
-		    const people = [{firstName: 'Lionel', lastName: 'Mudpudel'}];
-		    const personListWrapper = shallow(<PersonList people={people} />);
-		    const peopleListItems = personListWrapper.find('li');
+      const people = [{firstName: 'Lionel', lastName: 'Mudpudel'}];
+      const personListWrapper = shallow(<PersonList people={people} />);
+      const peopleListItems = personListWrapper.find('li');
 
-		    expect(peopleListItems).toHaveLength(1);
-		  })
+      expect(peopleListItems).toHaveLength(1);
+    })
 
 - TEST FAIL(RED)
 - The test noticed that we don't have 1 list item(person) in our ul.
 
-<h5></h5>
-Add to PersonList.js	
+<h5>Add to PersonList.js</h5>
 
     export default () => 
       <ul><li></li></ul>
@@ -434,8 +428,7 @@ Add to PersonList.js
 - Only at this point, the importance of the 0 test is reveiled even tough it passed the first time.
 
 - We must check if props.people exist and props.people.lenght is equal to 1.
-<h5></h5>
-Add to PersonList.js
+<h5>Add to PersonList.js</h5>
 
 		export default (props) => {
 		  if (props.people && props.people.length == 1) {
@@ -446,26 +439,22 @@ Add to PersonList.js
 
 - PASS TEST(GREEN)
 	
-<h4></h4>Refactor(NAMING)
-<h5></h5>
-Add
+<h4>Refactor(NAMING)</h4>
+<h5>Add</h5>
 
 	  it('renders 1 li element when 1 person exists', () => {...
 
-<h4></h4>Refactor, implement single responsibility principle(function that does 1 thing only)and rewrite 
-the if statement with a turnary operator.
-<h5></h5>
-Add to PersonList.js
+<h4>Refactor, implement single responsibility principle(function that does 1 thing only)and rewrite 
+the if statement with a turnary operator.</h4>
+<h5>Add to PersonList.js</h5>
 
     export default (props) => 
       <ul>{props.people && props.people.length == 1 ? <li></li>: undefined}</ul>
 
 - TEST PASS(GREEN)
 
-<h4></h4>
-- Next test(RED)...multiple in ZOMBIES(M).
-<h5></h5>
-Add to PeopleList.test.js
+<h4>Next test(RED)...multiple in ZOMBIES(M).</h4>
+<h5>Add to PeopleList.test.js</h5>
 
 		it('', () => {
       const people = [
@@ -481,11 +470,10 @@ Add to PeopleList.test.js
 - TEST FAIL(RED)
 - Expected length: 2, Received length: 0
 
-<h5></h5>
-Add multiple items(people) to unordered list.
-<h5></h5>
-Change code for map method(high order function) in PersonList.js 
-which maps every person from an array into a new array with list items(li).
+<h4>Add multiple items(people) to unordered list.</h4>
+
+<h5>Change code for map method(high order function) in PersonList.js 
+which maps every person from an array into a new array with list items(li).</h5>
 
     export default (props) => 
     <ul>{props.people ? props.people.map(() => <li></li>): undefined }</ul>
@@ -494,24 +482,23 @@ which maps every person from an array into a new array with list items(li).
 - But we still have an error...
 - Warning: Each child in a list should have a unique "key" prop.
 
+- Implement key to list with person and index parameter to map(
 <h5>Add</h5>
-Implement key to list with person and index parameter to map().
 
 	  <ul>{props.people ? props.people.map((person, i) => <li key={i}></li>): undefined }</ul>
 
 - We fixed the error and all our tests are still passed.
 
-<h4></h4>Refactor(NAMING)
-<h5></h5>
+<h4>Refactor(NAMING)</h4>
+<h5>Add</h5>
 
 	  it('renders 1 li element for every person that exists', () => {
 
-<h4></h4>Refactor
-(destructuring the people property from the props)
-(set default to empty array)
-(map over people array)
-<h5></h5>
-Add to personList.js
+<h4>Refactor</h4>
+- Destructuring the people property from the props.
+- Set default to empty array.
+- Map over people array.
+<h5>Add to personList.js</h5>
 
 		export default ({ people =  [] }) => 
   	  <ul>{people.map((person, i) => <li key={i}></li>)}</ul>
@@ -524,8 +511,7 @@ Add to personList.js
 <p>You shouldn't have multiple assertions inside one test(single responsibility principle)
 but in this case, even tho we implement multiple assertions in one test
 they're part of the same "thing" that we are testing which is the name.</p>
-<h5></h5>
-Add to PersonList.test.js
+<h5>Add to PersonList.test.js</h5>
 
 		it('', () => {
       const people = [
@@ -540,15 +526,14 @@ Add to PersonList.test.js
 - TEST FAIL(RED)
 - Expected substring: "Lionel", Received string:  ""
 
-<h5></h5>
-Add firstName and lastName inside list item element.
+<h5>Add firstName and lastName inside list item element.</h5>
 	
     export default ({ people =  [] }) => 
   	  <ul>{people.map((person, i) => <li key={i}>{person.firstName} {person.lastName}</li>)}</ul>
 
 - TEST PASS(GREEN)
 
-<h4></h4>Refactor(NAMING)
+<h4>Refactor(NAMING)</h4>
 <h5>Add</h5>
 
 	  it('renders the first and last name of a person', () => {...
