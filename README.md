@@ -74,7 +74,7 @@
 </ol>
 
 <h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
-<p>Note that all run commands has "" around them.</p>
+<p>Note that all run commands have "" around them.</p>
 <h3>Create app and install dependencies:</h3>
 <ol>
   <li>Open up your terminal, "cd" in your project directory and run "mkdir DIRNAME"(This command will create a new directory named DIRNAME but you can change this if you want).</li>
