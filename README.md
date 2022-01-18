@@ -421,7 +421,7 @@ have your test files next to their corresponding component so everything is easy
 - Now we have a different test failing which is the one checking for 0 list people. 
 - Only at this point, the importance of the 0 test is reveiled even tough it passed the first time.
 
-- (Still in GREEN stage) We must check if props.people exist and props.people.lenght is equal to 1.
+- We must check if props.people exist and props.people.lenght is equal to 1.
 <h5>Add to PersonList.js</h5>
 
 		export default (props) => {
