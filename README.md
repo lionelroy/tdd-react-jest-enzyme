@@ -4,7 +4,7 @@
 
 <h2>Theory</h2>
 
-<p>TDD(Test-Driven-Dvelopment) is a process of creating software which uses automated tests not only as a tool for proving the code correctness but it leads to developing applications in a clean and well-designed way.</p>
+<p>TDD(Test-Driven-Development) is a process of creating software which uses automated tests not only as a tool for proving the code correctness but it leads to developing applications in a clean and well-designed way.</p>
 
 <h3>Let's start with the TDD-cycle which consists of 3 stages:</h4>
 <ol>
@@ -34,25 +34,25 @@
 <br/>
 
 <h3>ZOMBIES Testing(One Behavior at a time)</h3>
-<p>We will also use Test-Driven-Development guided by ZOMBIES.</p>
+<p>We'll also use Test-Driven-Development guided by ZOMBIES.</p>
 <p>ZOMBIES is an acronym that helps you decide where to start, what test to write next and make sure that, to the best of your ability, you do not forget critical tests and production code behaviors. You can also add N(null) for NZOMBIES.</p>
 <h4>NZOMBIES stands for:</h4>
 <ul>
   <li>N - Null</li>
-  <li>Z — Zero</li>
-  <li>O — One</li>
-  <li>M — Many (or More complex)</li>
-  <li>B — Boundary Behaviors</li>
-  <li>I — Interface definition</li>
-  <li>E — Exercise Exceptional behavior</li>
-  <li>S — Simple Scenarios, Simple Solutions</li>
+  <li>Z - Zero</li>
+  <li>O - One</li>
+  <li>M - Many (or More complex)</li>
+  <li>B - Boundary Behaviors</li>
+  <li>I - Interface definition</li>
+  <li>E - Exercise Exceptional behavior</li>
+  <li>S - Simple Scenarios, Simple Solutions</li>
 </ul>
 <br/>
 
 <h3>The Test Pyramid</h3>
 <p>Here we have Mike Cohn's test pyramid consisting of three layers that should be implemented in your test suite.</p>
 <ul>
-  <li>Top(more isolation & faster)- User Interface tests or End to End test.</li>
+  <li>Top(more isolation & faster)- User Interface test or End to End test.</li>
   <li>Middle- Service test or integration test.</li>
   <li>Base(more integration & slower)- Unit test, inputs/outpus, (TDD)inside-out testing.</li>
 </ul>
@@ -66,15 +66,15 @@
 
 <h2>CREATE THE APP</h2>
 <p>You can have your code and this README file open in seperate windows next to each other to follow along.</p>
-<p>Let's start by creating the app with all it's dependencies and clean up a bit of the boiler plate code inside our React application, after this is completed, we will go through the TDD process by following the 3 stages from the TDD-cycle:</p>
+<p>Let's start by creating the app with all it's dependencies and clean up a bit of the boiler plate code inside our React application, after this is completed, we'll go through the TDD process by following the 3 stages from the TDD-cycle:</p>
 <ol>
   <li>Creating a test that will fail(RED stage of the TDD-cycle).</li>
   <li>Adding the code required to pass the test(GREEN stage of the TDD-cycle).</li>
-  <li>Refactoring (GREEN2 stage of the TDD-cycle).</li>
+  <li>Refactoring(GREEN2 stage of the TDD-cycle).</li>
 </ol>
-<h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
-<p>Note that all run commands will have "" around them.</p>
 
+<h4>Follow the steps bellow to create the app from scratch in Visual Studio code.</h4>
+<p>Note that all run commands has "" around them.</p>
 <h3>Create app and install dependencies:</h3>
 <ol>
   <li>Open up your terminal, "cd" in your project directory and run "mkdir DIRNAME"(This command will create a new directory named DIRNAME but you can change this if you want).</li>
@@ -117,11 +117,13 @@
     import Adapter from 'enzyme-adapter-react-16';
     configure({ adapter: new Adapter()});
 
-<br/>
+<br/><br/>
 
-<h3>Let's start implementing our tests</h3>
 
-<h4>Create a test that fails(RED) - App.test.js</h4>
+<h2>Let's start implementing our tests</h2>
+
+<h4>(RED)Create a test that fails</h4>
+<h5> Add to App.test.js</h5>
 
     describe('App', () => {
       it('', () => {
@@ -154,10 +156,11 @@
       })
     })
 
-- SUCCESS(RED)...This test should fail because we don't have a person list implemented yet.
+- SUCCESS(RED)
+- This test should fail because we don't have a person list implemented yet.
 - The first step of the process is done which was creating a test that fails.(RED)
 
-<h4>Create PersonList.js and write only enough of an implementation as to pass the test(GREEN).</h4>
+<h4>(GREEN)Create PersonList.js and write only enough of an implementation as to pass the test.</h4>
 <h5>Add to PersonList.js</h5>
 
 		export default () => { 
@@ -181,6 +184,7 @@
 
 - SUCCESS(GREEN)The test should now pass as we implemented just enough for the test to pass.
 - Now we need to create an assertion.
+
 <h5>Add to App.test.js</h5>
 
     it('', () => {
@@ -192,25 +196,18 @@
 
 - The test should still pass and now we have a completed test with an assertion.
 
-<h4>Refactor stage(GREEN)</h4>
+<h4>(GREEN2)Refactor stage</h4>
 - Let's add a name for our test.
-<h5>Add</h5>
+<h5>Add to App.test.js</h5>
  		    
 		it('renders a person list', () => {...
 
+- SUCCESS(GREEN2)
 - Remember to also test after refactoring, your new refactored code might have broken something. In this case, we are simply naming our test so no need to worry.
+</br>
 	
-<h4>Create an object in the root component for the next test(write test first)</h4>
-<h5>Add in App.test.js</h5>
-
-		it('', () => {
-          const appWrapper = shallow(<App />);
-          const appState = appWrapper.state();
-    })
-
-- ERROR...ShallowWrapper::state() can only be called on class components
-- state does not exist on functional components so you must edit the App.js file. 
-<h5>Add a Class instead of a function.</h5>
+<h4>State does not exist on functional components so you must edit the App.js file.</h4>
+<h5>Add a Class instead of a function in App.js.</h5>
 
 		import React, { Component } from 'react';
 		import PersonList from './PersonList';
@@ -227,9 +224,9 @@
 
 		export default App;
 
-- Success All tests are pass
+</br>
 
-<h4>Now we must implement test in case the appState returns Null which we don't want(Null NZOMBIES(N))</h4>
+<h4>(RED)Now we must implement test in case the appState returns Null which we don't want(Null NZOMBIES(N))</h4>
 <h5>Add to App.test.js</h5>
 
 		it('', () => {
@@ -242,21 +239,23 @@
 - TEST FAILED(RED)
 - Received Null 
 
+<h4>(GREEN)</h4>
 <h5>Add to App.js</h5>
 
 	  state = {}
 
-- TEST PASS
+- (GREEN)TEST PASS
 - Not receiving NULL anymore
 
-<h4>Refactor</h4>
+<h4>(GREEN2)Refactor</h4>
 <h5>Add name to test</h5>
 
 		it('has state', () => ....
 
 - Always check if refactor stage is causing a test to fail.
+</br>
 
-<h4>Next Test(red)</h4>
+<h4>(RED)Next Test</h4>
 - Check if there's a people property defined
 <h5>Add to App.test.js</h5>
 
@@ -270,6 +269,7 @@
 - TEST FAIL(RED)
 - People property does not exist on state yet
 
+<h4>(GREEN)</h4>
 <h5>Add to App.js</h5>
 
 	  state = { people: [] }
@@ -277,14 +277,14 @@
 - TEST PASS(GREEN)
 - people property is now defined
 
-<h4>Refactor(DRY principles...)</h4>
-- Clean redundancy in App.test.js
-<h5>Delete in every tests</h5>
+<h4>(GREEN2)Refactor(DRY principles...)</h4>
+- Clean redundancy.
+<h5>Delete from every single test in App.test.js</h5>
 
 		const appWrapper = shallow(<App />);
 	 
 <h4>Refactored code</h4>
-<h5>Add at the top of all tests</h5>
+<h5>Add at the very top to the first test.</h5>
 
     describe('App', () => {
     let appWrapper;
@@ -294,7 +294,7 @@
     });
 
 - Notice how const appWrapper changed to let appWrapper.
-- Notice there is no statement in beforeAll so the label is removed.
+- Also notice there is no statement in beforeAll so the label is removed.
 
 <h5>You can delete the following test completely which is now redundant.</h5>
 
@@ -306,9 +306,11 @@
 
 		it('has a people property on state', () => {...
 
-- TEST PASS(GREEN)
+- TEST PASS(GREEN2)
+
+</br>
 		
-<h4>Next test(RED)...make sure the people property is passed to the PersonList.(Write test first)</h4>
+<h4>(RED)Next test...make sure the people property is passed to the PersonList.</h4>
 <h5>Add to App.test.js</h5>
 
 		it('', () => {
@@ -320,30 +322,32 @@
 - TEST FAIL(RED)
 - Expected empty array but received undefined.
 
-- Create people prop and send it at state.people (App.js)
-<h5>Add</h5>
+<h4>(GREEN)Create people prop and send it at state.people</h4>
+<h5>Add to App.js</h5>
 
 	  <PersonList people={this.state.people} />
 
 - TEST PASS(GREEN)
 
-<h4>Refactor(Naming)</h4>
+<h4>(GREEN2)Refactor(Naming)</h4>
 <h5>Add to App.test.js</h5>
 
 	  it('passes people property of state to personList as prop', () => {...
 
-- TEST PASS(GREEN)
+- TEST PASS(GREEN2)
+
+</br>
 
 - Keep in mind these tests are made to see if the app is working, 
 not to see if anything is rendered in the browser.
 - The tests for PersonList is now finished but nothing will appear in the browser by running our 
 development server with 'npm start' because we did not render anything in the PersonList component yet.
 
-
 - You can either bundle all your test files in a test folder or 
 have your test files next to their corresponding component so everything is easy to track.
 - In this exemple I will have my tests files created next to the corresponding component file.
-- Create a test file for the PersonList component in your src folder and name it PersonList.test.js.
+
+<h4>(RED)Create a test file for the PersonList component in your src folder and name it PersonList.test.js.</h4>
 <h5>Add to PersonList.test.js</h5>
 
 		import React from 'react';
@@ -362,8 +366,8 @@ have your test files next to their corresponding component so everything is easy
 - TEST FAIL(RED)
 - Expected length: 1, Received length: 0
 
-<h4>Implement unordered list(Uls) in PersonList.js</h4>
-<h5>Add</h5>
+<h4>(GREEN)Implement unordered list(uls)</h4>
+<h5>Add in PersonList.js</h5>
 
 	  import React from 'react';
 
@@ -373,17 +377,16 @@ have your test files next to their corresponding component so everything is easy
 - Notice you don't need a return statement when there's only one line of command in your function. 
 - Curly braces are used to define a scope for multiple things happening in a function.
 
-<h4>Refactor(Naming)</h4>
+<h4>(GREEN2)Refactor(Naming)</h4>
 <h5>Add to PersonList.test.js</h5>
 
     it('renders a ul element', () => {...
 
-- TEST PASS(GREEN)
+- TEST PASS(GREEN2)
 
-- Next Test(RED)...Create test that checks if list elements(li) are passed to the ul element
+<h4>(RED)Next Test...Create test that checks if list elements(li) are passed to the ul element<h4>
 - First start by implementing (0 in ZOMBIES(Z)).
-<h5></h5>
-Add
+<h5>Add to PersonList.test.js</h5>
 
     it('', () => {
     const personListWrapper = shallow(<PersonList />);
@@ -392,18 +395,18 @@ Add
     expect(peopleListItems).toHaveLength(0);
     })
 
-- OOOPPS TEST PASS(GREEN) but we were supposed to write a test that fails first.
+- OOOPPS!!! TEST PASS(GREEN) but we're supposed to write a test that fails first.
 - Altough this is true, we still want to keep this valid test because we do want to check 
 	if we get 0 items(people) in the unordered list(ul).(0 case in ZOMBIES)
 
-<h4>Refactor(Naming)</h4>
+<h4>(GREEN2)Refactor(Naming)</h4>
 <h5>Add</h5>
 
     it('renders no li element when no people exist', () => {...
 
-- TEST PASS(GREEN)
+- TEST PASS(GREEN2)
 
-- Now let's make sure we write a test sufficient enough to cause a failure(RED)(1 case in ZOMBIES(O)).
+<h4>(RED)Now let's make sure we write a test sufficient enough to cause a failure(1 case in ZOMBIES(O)).</h4>
 <h5>Add in PersonList.test.js</h5>
 
 		it('', () => {
@@ -417,7 +420,8 @@ Add
 - TEST FAIL(RED)
 - The test noticed that we don't have 1 list item(person) in our ul.
 
-<h5>Add to PersonList.js</h5>
+<h4>(GREEN)</h4>
+<h5>Add li element to PersonList.js</h5>
 
     export default () => 
       <ul><li></li></ul>
@@ -427,7 +431,7 @@ Add
 - Now we have a different test failing which is the one checking for 0 list people. 
 - Only at this point, the importance of the 0 test is reveiled even tough it passed the first time.
 
-- We must check if props.people exist and props.people.lenght is equal to 1.
+- (Still in GREEN stage) We must check if props.people exist and props.people.lenght is equal to 1.
 <h5>Add to PersonList.js</h5>
 
 		export default (props) => {
@@ -439,21 +443,25 @@ Add
 
 - PASS TEST(GREEN)
 	
-<h4>Refactor(NAMING)</h4>
+<h4>(GREEN2)Refactor(NAMING)</h4>
 <h5>Add</h5>
 
 	  it('renders 1 li element when 1 person exists', () => {...
 
-<h4>Refactor, implement single responsibility principle(function that does 1 thing only)and rewrite 
+  - TEST PASS(GREEN2)
+
+<h4>(...GREEN2)Refactor, implement single responsibility principle(function that does 1 thing only)and rewrite 
 the if statement with a turnary operator.</h4>
 <h5>Add to PersonList.js</h5>
 
     export default (props) => 
       <ul>{props.people && props.people.length == 1 ? <li></li>: undefined}</ul>
 
-- TEST PASS(GREEN)
+- TEST PASS(GREEN2)
 
-<h4>Next test(RED)...multiple in ZOMBIES(M).</h4>
+</br>
+
+<h4>(RED)Next test...multiple in ZOMBIES(M).</h4>
 <h5>Add to PeopleList.test.js</h5>
 
 		it('', () => {
@@ -470,9 +478,9 @@ the if statement with a turnary operator.</h4>
 - TEST FAIL(RED)
 - Expected length: 2, Received length: 0
 
+<h4>(GREEN2</h4>
 <h4>Add multiple items(people) to unordered list.</h4>
-
-<h5>Change code for map method(high order function) in PersonList.js 
+- Change code for map method(high order function) in PersonList.js 
 which maps every person from an array into a new array with list items(li).</h5>
 
     export default (props) => 
@@ -487,12 +495,14 @@ which maps every person from an array into a new array with list items(li).</h5>
 
 	  <ul>{props.people ? props.people.map((person, i) => <li key={i}></li>): undefined }</ul>
 
-- We fixed the error and all our tests are still passed.
+- We fixed the error and all our tests are still passed(GREEN).
 
-<h4>Refactor(NAMING)</h4>
+<h4>(GREEN2)Refactor(NAMING)</h4>
 <h5>Add</h5>
 
 	  it('renders 1 li element for every person that exists', () => {
+
+- TEST PASS(GREEN2)
 
 <h4>Refactor</h4>
 - Destructuring the people property from the props.
@@ -503,13 +513,13 @@ which maps every person from an array into a new array with list items(li).</h5>
 		export default ({ people =  [] }) => 
   	  <ul>{people.map((person, i) => <li key={i}></li>)}</ul>
 
-- TEST PASS(GREEN)
+- TEST PASS(GREEN2)
+</br>
 
-<h4>RED</h4>
-- Write a test that checks if the names are appearing inside the list item elements.
+<h4>(RED)Write a test that checks if the names are appearing inside the list item elements.</h4>
 <h5>IMPORTANT...</h5>
 <p>You shouldn't have multiple assertions inside one test(single responsibility principle)
-but in this case, even tho we implement multiple assertions in one test
+but in this case, even though we implement multiple assertions in one test,
 they're part of the same "thing" that we are testing which is the name.</p>
 <h5>Add to PersonList.test.js</h5>
 
@@ -526,6 +536,7 @@ they're part of the same "thing" that we are testing which is the name.</p>
 - TEST FAIL(RED)
 - Expected substring: "Lionel", Received string:  ""
 
+<h4>(GREEN)</h4>
 <h5>Add firstName and lastName inside list item element.</h5>
 	
     export default ({ people =  [] }) => 
@@ -533,14 +544,13 @@ they're part of the same "thing" that we are testing which is the name.</p>
 
 - TEST PASS(GREEN)
 
-<h4>Refactor(NAMING)</h4>
+<h4>(GREEN2)Refactor(NAMING)</h4>
 <h5>Add</h5>
 
 	  it('renders the first and last name of a person', () =cd > {...
 
-- TEST PASS(GREEN)
+- TEST PASS(GREEN2)
+- The Personlist component tests is now completed.
+</br>
 
-- The Personlist component tests is done and we can move on to a new component now...
-
-- TO BE CONTINUED...
-- Create library of TDD components and add more theory about TDD.
+- TO DO: Create library of TDD components and add more theory about TDD.
