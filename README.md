@@ -127,21 +127,11 @@
 
     describe('App', () => {
       it('', () => {
-        
-      })
-    })
-
-- This test will pass when you run 'npm test' because we haven't set up any assertion to fail.
-
-<h5>Add</h5>
-
-    describe('App', () => {
-      it('', () => {
         const appWrapper = shallow(<App />)
       })
     })
 
-- The test should still pass when you run 'npm test' because we still haven't set up any assertion to fail.
+- This test will pass when you run 'npm test' because we haven't set up any assertion to fail.
 - Also make sure that Enzyme is installed in order to use shallow.
 
 <h5>Add</h5>
@@ -158,7 +148,7 @@
 
 - SUCCESS(RED)
 - This test should fail because we don't have a person list implemented yet.
-- The first step of the process is done which was creating a test that fails.(RED)
+- The first step of the process is done(creating a test that fails).
 
 <h4>(GREEN)Create PersonList.js and write only enough of an implementation as to pass the test.</h4>
 <h5>Add to PersonList.js</h5>
@@ -441,7 +431,7 @@ have your test files next to their corresponding component so everything is easy
 		  return <ul></ul>
 		}
 
-- PASS TEST(GREEN)
+- TEST PASS(GREEN)
 	
 <h4>(GREEN2)Refactor(NAMING)</h4>
 <h5>Add</h5>
